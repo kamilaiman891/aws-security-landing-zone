@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  localstack:
+    container_name: localstack_landing_zone
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"
+    environment:
+      # AWS CLI needs these default dummy credentials
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+      
+      # Persistence (Saves state so we don't lose data on reboot)
+      - PERSISTENCE=1
+      
+      # Debug logging for troubleshooting
+      - DEBUG=1
+      
+      # Multi-account configuration
+      # By default, LocalStack treats everything as account '000000000000'
+      # But enabling this allows us to use organizations & separate accounts!
+      - ENFORCE_IAM=1
+      
+      # Note: LocalStack Pro is required for full Organization/GuardDuty/SecurityHub feature sets.
+      # If you get a pro key, you can uncomment the line below:
+      # - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN- }
+      
+    volumes:
+      - "./volume:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"

@@ -1,0 +1,21 @@
+# LocalStack cache and state
+.localstack/
+.localstack
+volume/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+.terraform.tfstate.lock.info
+
+# Sensitive
+.env
+secret*
+*.pem
+*.key
+
+# OS generated files
+.DS_Store
+Thumbs.db
