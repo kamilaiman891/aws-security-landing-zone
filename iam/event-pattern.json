@@ -1,0 +1,8 @@
+{
+  "detail": {
+    "errorCode": [
+      "AccessDenied",
+      "UnauthorizedOperation"
+    ]
+  }
+}

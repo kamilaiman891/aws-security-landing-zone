@@ -1,0 +1,7 @@
+[
+  {
+    "Source": "test.hacker",
+    "DetailType": "AWS API Call via CloudTrail",
+    "Detail": "{\"errorCode\":\"AccessDenied\"}"
+  }
+]
