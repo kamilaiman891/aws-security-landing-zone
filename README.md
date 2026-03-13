@@ -4,6 +4,53 @@ This project demonstrates how to build an Automated Multi-Account Security Landi
 
 ## Architecture
 
+```mermaid
+flowchart TD
+    subgraph Account ["SINGLE AWS ACCOUNT (Zero-Trust Environment)"]
+        direction TB
+        
+        IAM["AWS Identity and Access Management"]
+        
+        subgraph Zone1 ["Zone 1 : Centralized Auditing ( the Vault)"]
+            direction LR
+            CT["AWS CloudTrail"] --> S3["S3 Buckets"]
+        end
+        
+        subgraph Zone2 ["Zone 2 : Isolated Workload Network (The Application)"]
+            direction TB
+            subgraph VPC ["VPC"]
+                direction LR
+                subgraph AppTier ["Private Subnet : App Tier"]
+                    subgraph SG ["Security Group"]
+                        EC2["EC2"]
+                    end
+                end
+                subgraph DataTier ["Private Subnet : Data Tier"]
+                    RDS["RDS (Database)"]
+                end
+            end
+        end
+        
+        subgraph Zone3 ["Zone 3 : Security Alerting (The Mocked Watchtower)"]
+            direction LR
+            EB["EventBridge"] --> SQS["SQS"]
+        end
+        
+        IAM ~~~ Zone1
+        Zone1 ~~~ Zone2
+        Zone2 ~~~ Zone3
+    end
+
+    style Account fill:none,stroke:#d32f2f,stroke-width:2px
+    style Zone1 fill:none,stroke:#333,stroke-dasharray: 5 5
+    style Zone2 fill:none,stroke:#333,stroke-dasharray: 5 5
+    style Zone3 fill:none,stroke:#333,stroke-dasharray: 5 5
+    style VPC fill:none,stroke:#666
+    style AppTier fill:none,stroke:#666
+    style DataTier fill:none,stroke:#666
+    style SG fill:none,stroke:#f00,stroke-dasharray: 5 5,stroke-width:2px
+```
+
 The project provisions AWS infrastructure locally and applies security principles across four core modules:
 
 1. **Module 1: The Foundation (IAM)**
