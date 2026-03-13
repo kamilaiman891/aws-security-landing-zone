@@ -4,7 +4,9 @@ This project demonstrates how to build an Automated Multi-Account Security Landi
 
 ## Architecture
 
-<img width="1144" height="427" alt="image" src="https://github.com/user-attachments/assets/fa483a6b-abdf-4e1e-b845-eaf7a696e40d" />
+
+<img width="721" height="972" alt="Untitled Diagram drawio (2)" src="https://github.com/user-attachments/assets/e5a92711-ceab-4507-8914-36408cf003a5" />
+
 
 
 The project provisions AWS infrastructure locally and applies security principles across four core modules:
